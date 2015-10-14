@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="custom_dialog_size">95dp</dimen>
+    <dimen name="custom_dialog_height_small">50dp</dimen>
+    <dimen name="custom_dialog_height_big">95dp</dimen>
+    <dimen name="custom_dialog_padding_top">10dp</dimen>
+
+</resources>
