@@ -2,7 +2,6 @@ package com.tangwy.ydialogdemo;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -10,8 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
-import com.tangwy.ydialog.YDialog;
-import com.tangwy.ydialog.internal.BallsDrawable;
+import com.tangwy.ydialog.AnimDialog;
+import com.tangwy.ydialog.BallsDrawable;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
 //                ballsDrawable.start();
-                YDialog.show(MainActivity.this, "   请稍候...");
+                AnimDialog.show(MainActivity.this, "  请稍候...");
 //                YDialog.show(MainActivity.this);
             }
         });
@@ -40,6 +39,13 @@ public class MainActivity extends AppCompatActivity {
         iv = (ImageView) findViewById(R.id.iv);
         ballsDrawable = new BallsDrawable(iv);
         iv.setImageDrawable(ballsDrawable);
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AnimDialog.Builder builder = new AnimDialog.Builder(MainActivity.this);
+                builder.message("请稍候").build().show();
+            }
+        });
     }
 
     @Override

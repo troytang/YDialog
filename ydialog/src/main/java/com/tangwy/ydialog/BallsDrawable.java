@@ -1,4 +1,4 @@
-package com.tangwy.ydialog.internal;
+package com.tangwy.ydialog;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,7 +9,7 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.Transformation;
 import android.widget.ImageView;
 
-import com.tangwy.ydialog.R;
+import com.tangwy.ydialog.internal.BaseDrawable;
 
 /**
  * Created by Troy Tang on 2015-10-13.
@@ -20,8 +20,7 @@ public class BallsDrawable extends BaseDrawable {
     private final int STATUS_OUT = 2;
     private final int STATUS_RUN = 3;
 
-    private final int TOTAL_DISTANCE = 70;
-    private final int BALL_SIZE = 20;
+
 
     private final int BALL_IN_DURATION = 450;
     private final int BALL_OUT_DURATION = 250;
@@ -41,10 +40,16 @@ public class BallsDrawable extends BaseDrawable {
     private Animation mOutAnimation;
     private Animation mRunAnimation;
 
+    private int mDistance;
+    private int mBallSize;
+
     private int mStatus;
 
     public BallsDrawable(ImageView imageView) {
         super(imageView);
+
+        mDistance = getContext().getResources().getDimensionPixelSize(R.dimen.custom_dialog_distance);
+        mBallSize = getContext().getResources().getDimensionPixelSize(R.dimen.custom_dialog_ball_size);
 
         setupAnimations();
         mParentView.post(new Runnable() {
@@ -154,8 +159,8 @@ public class BallsDrawable extends BaseDrawable {
 
         mViewWidth = viewWidth;
         mViewHeight = viewHeight;
-        mBlueLeft = (viewWidth - TOTAL_DISTANCE) / 2 - BALL_SIZE / 2;
-        mOrangeLeft = viewWidth / 2 + TOTAL_DISTANCE / 2 - BALL_SIZE / 2;
+        mBlueLeft = (viewWidth - mDistance) / 2 - mBallSize / 2;
+        mOrangeLeft = viewWidth / 2 + mDistance / 2 - mBallSize / 2;
 
         createBitmaps();
     }
@@ -163,8 +168,8 @@ public class BallsDrawable extends BaseDrawable {
     private void createBitmaps() {
         mBlueBall = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.blue);
         mOrangeBall = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.orange);
-        mBlueBall = Bitmap.createScaledBitmap(mBlueBall, BALL_SIZE, BALL_SIZE, true);
-        mOrangeBall = Bitmap.createScaledBitmap(mOrangeBall, BALL_SIZE, BALL_SIZE, true);
+        mBlueBall = Bitmap.createScaledBitmap(mBlueBall, mBallSize, mBallSize, true);
+        mOrangeBall = Bitmap.createScaledBitmap(mOrangeBall, mBallSize, mBallSize, true);
     }
 
     private void ballsIn(float percent) {
@@ -186,8 +191,8 @@ public class BallsDrawable extends BaseDrawable {
             case STATUS_IN:{
                 Matrix matrix = new Matrix();
                 matrix.postScale(mInScale, mInScale);
-                matrix.postTranslate(mBlueLeft + BALL_SIZE / 2 - mInScale * BALL_SIZE / 2,
-                        mViewHeight / 2 - mInScale * BALL_SIZE / 2);
+                matrix.postTranslate(mBlueLeft + mBallSize / 2 - mInScale * mBallSize / 2,
+                        mViewHeight / 2 - mInScale * mBallSize / 2);
                 canvas.drawBitmap(mBlueBall, matrix, null);
             }
                 break;
@@ -197,7 +202,7 @@ public class BallsDrawable extends BaseDrawable {
                 break;
             case STATUS_RUN:{
                 Matrix matrix = new Matrix();
-                matrix.postTranslate(mBlueLeft + TOTAL_DISTANCE * mRunPercent, mViewHeight / 2 - BALL_SIZE / 2);
+                matrix.postTranslate(mBlueLeft + mDistance * mRunPercent, mViewHeight / 2 - mBallSize / 2);
                 canvas.drawBitmap(mBlueBall, matrix, null);
             }
                 break;
@@ -209,8 +214,8 @@ public class BallsDrawable extends BaseDrawable {
             case STATUS_IN:{
                 Matrix matrix = new Matrix();
                 matrix.postScale(mInScale, mInScale);
-                matrix.postTranslate(mOrangeLeft + BALL_SIZE / 2 - mInScale * BALL_SIZE / 2,
-                        mViewHeight / 2 - mInScale * BALL_SIZE / 2);
+                matrix.postTranslate(mOrangeLeft + mBallSize / 2 - mInScale * mBallSize / 2,
+                        mViewHeight / 2 - mInScale * mBallSize / 2);
                 canvas.drawBitmap(mOrangeBall, matrix, null);
             }
             break;
@@ -220,7 +225,7 @@ public class BallsDrawable extends BaseDrawable {
             break;
             case STATUS_RUN:{
                 Matrix matrix = new Matrix();
-                matrix.postTranslate(mOrangeLeft - TOTAL_DISTANCE * mRunPercent, mViewHeight / 2 - BALL_SIZE / 2);
+                matrix.postTranslate(mOrangeLeft - mDistance * mRunPercent, mViewHeight / 2 - mBallSize / 2);
                 canvas.drawBitmap(mOrangeBall, matrix, null);
             }
             break;

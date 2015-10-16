@@ -12,7 +12,7 @@ import android.widget.ImageView;
 /**
  * Created by Troy Tang on 2015-10-13.
  */
-abstract class BaseDrawable extends Drawable implements Drawable.Callback, Animatable {
+public abstract class BaseDrawable extends Drawable implements Drawable.Callback, Animatable {
 
     public ImageView mParentView;
 

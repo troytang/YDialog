@@ -9,7 +9,7 @@
         android:id="@+id/ivLoading"
         android:layout_width="@dimen/custom_dialog_size"
         android:layout_height="@dimen/custom_dialog_height_small"
-        android:paddingTop="@dimen/custom_dialog_padding_top"/>
+        android:paddingTop="@dimen/custom_dialog_padding_top" />
 
     <TextView
         android:id="@+id/tvDesc"
@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="25dp"
         android:gravity="center_horizontal"
-        android:textColor="@android:color/white"
-        android:text="请稍候..."/>
+        android:text="请稍候..."
+        android:textColor="@android:color/white" />
 
 </LinearLayout>
